@@ -1,1 +1,1 @@
-# odin-tic-tac-toe
+# odin-rock-paper-scissors
