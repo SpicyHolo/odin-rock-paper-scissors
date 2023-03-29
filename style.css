@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Play:wght@700&display=swap');
 
 :root {
-    --main-color: #e69596;
-    --main-color-dark: #b62b2e;
-    --colored-text: #d75759;
+    --main-color: #7C1D1F;
+    --main-color-light: #b62b2e;
+    --colored-text: #E9A0A1;
     --dark-background:  rgb(25, 24, 41);
-    --button-background: rgb(80, 76, 126);;
+    --button-background: rgb(231, 228, 255);
 }
 
 body, html {
@@ -82,7 +82,7 @@ a.nav-link:hover {
 }
 
 .game {
-    background-color: var(--main-color-dark);
+    background-color: var(--main-color-light);
     padding: 32px;
     border-radius: 8px;
 
@@ -121,7 +121,7 @@ img.hand-choice-player, img.hand-choice-computer {
 
 
 .buttons {
-    background-color: var(--main-color-dark);
+    background-color: var(--main-color-light);
     padding: 32px;
     border-radius: 8px;
 
