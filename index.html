@@ -6,9 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="page">
+        <header>
+            <img src="icons/holo-icon-static.gif" alt="" class="icon">
+            <nav>
+                <a href="https://www.theodinproject.com/" class="nav-link">The Odin Project</a>
+                <a href="https://github.com/spicyHolo/odin-rock-paper-scissors" class="nav-link">GitHub</a>
+            </nav>
+        </header>
+        <div class="content">
+            <div class="title">ROCK, PAPER, or SCISSORS ?</div>
+
+            <div class="game">
+                <div class="score">0 : 0 </div>
+                <div class="hand-choices">
+                    <img src="icons/rock.png" alt="" class="hand-choice-player">
+                    VS
+                    <img src="icons/empty.png" alt="" class="hand-choice-computer">
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="button" id="rock"><img src="icons/rock.png" alt="rock" class="rock button-icon" ></button>
+                <button class="button" id="paper"><img src="icons/paper.png" alt="paper" class="button-icon" ></button></button>
+                <button class="button" id="scissors"><img src="icons/scissors.png" alt="scissros" class="button-icon" ></button></button>
+            </div>
+        </div>
+        <footer>
+            <ul class="footer-list">
+                <li>Copyright © GitHub@SpicyHolo</li>
+                <li>The Odin Project</li>
+                <li>Icons by icons8.com</li>
+            </ul>
+        </footer>
+    </div>
 </body>
 </html>

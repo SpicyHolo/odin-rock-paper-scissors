@@ -1,3 +1,23 @@
+// Get DOM elements
+const divScore = document.querySelector('.score');
+const imgPlayerChoice = document.querySelector('.hand-choice-player');
+const imgComputerChoice = document.querySelector('.hand-choice-computer');
+const buttons = document.querySelectorAll('.button');
+
+const header = document.querySelector('header')
+const icon = document.querySelector('.icon');
+
+
+// Init scores
+let playerScore = 0;
+let computerScore = 0;
+
+// Add animation on mouseover for icon
+buttons.forEach(button => button.addEventListener('mouseover', () => toggleHeaderIconAnimation(true)));
+buttons.forEach(button => button.addEventListener('mouseout', () => toggleHeaderIconAnimation(false)));
+// Add click events to butotns
+buttons.forEach(button => button.addEventListener('click', startRound));
+
 // Returns random integer in range (min, max) (inclusive) 
 function getRandomIntRange(min, max)
 {
@@ -27,25 +47,25 @@ function getPlayerChoice()
 }
 
 /// Calculates the outcome of one round of rock, paper, scissors
-// returns an object consisting of playerSelection, computerSelection and winner (player, computer or draw)
+// returns an object consisting of playerChoice, computerChoice and winner (player, computer or draw)
 // If either player or computer selection is invalid, returns undefined
-function playRound(playerSelection, computerSelection)
+function playRound(playerChoice, computerChoice)
 {
-    let roundOutcome = {"playerSelection": playerSelection, 
-                        "computerSelection": computerSelection, 
+    let roundOutcome = {"playerChoice": playerChoice, 
+                        "computerChoice": computerChoice, 
                         "winner": ""};
 
-    if (playerSelection === computerSelection) //draw
+    if (playerChoice === computerChoice) //draw
         roundOutcome["winner"] = "draw";
 
-    else if (playerSelection === "rock")
-        roundOutcome["winner"] = (computerSelection === "scissors") ? "player" : "computer";
+    else if (playerChoice === "rock")
+        roundOutcome["winner"] = (computerChoice === "scissors") ? "player" : "computer";
 
-    else if (playerSelection === "paper")
-        roundOutcome["winner"] =  (computerSelection === "rock") ? "player" : "computer";
+    else if (playerChoice === "paper")
+        roundOutcome["winner"] =  (computerChoice === "rock") ? "player" : "computer";
 
-    else if (playerSelection === "scissors")
-        roundOutcome["winner"] =  (computerSelection === "paper") ? "player" : "computer";
+    else if (playerChoice === "scissors")
+        roundOutcome["winner"] =  (computerChoice === "paper") ? "player" : "computer";
 
     else
     {
@@ -56,49 +76,69 @@ function playRound(playerSelection, computerSelection)
     return roundOutcome;
 }
 
-function playGame()
+function isGameRunning(playerScore, computerScore)
 {
-    let playerScore = 0;
-    let computerScore = 0;
-    let drawCount = 0;
-    while (computerScore < 3 && playerScore < 3) 
-    {
-        
-        const roundOutcome = playRound(getPlayerChoice(), getComputerChoice())
-        if (roundOutcome == null)
-            console.warn("playGame: game outcome is undefined!");
-
-        else if (roundOutcome["winner"] === "player")
-        {
-            console.log(`You win! ${roundOutcome["playerSelection"]} beats ${roundOutcome["computerSelection"]}. Score: ${playerScore} : ${computerScore}`)
-            playerScore++;
-        }
-
-        else if (roundOutcome["winner"] === "computer")
-        {
-            console.log(`You lose! ${roundOutcome["computerSelection"]} beats ${roundOutcome["playerSelection"]}. Score: ${playerScore} : ${computerScore}`)
-            computerScore++;
-        }
-
-        else if (roundOutcome["winner"] === "draw")
-        {
-            console.log(`It's a draw! Score: ${playerScore} : ${computerScore}`)
-            drawCount++;            
-        }
-
-        else
-        {
-            console.warn("playGame: Invalid game outcome!");
-        }
-
-    }
-
-    if (playerScore > computerScore)
-        console.log("You win! Number of draws: ${drawCount}.") 
-    else
-        console.log("You lose! Number of draws: ${drawCount}.")
-
-    console.log(`Number of draws: ${drawCount}.`)
+    console.log(playerScore, computerScore)
+    return playerScore < 3 && computerScore <3;
 }
 
-playGame();
+function updateWinner(playerScore, computerScore)
+{
+    if (playerScore > computerScore)
+        divScore.innerText = "You won! >:)";
+    else
+        divScore.innerText = 'You lost! >:(';
+}
+/* DOM Manipulation */
+
+function toggleHeaderIconAnimation(enable)
+{
+    icon.src = enable ? "icons/holo-icon.gif" : "icons/holo-icon-static.gif";
+}
+
+function updateScore(playerScore, computerScore)
+{
+    divScore.innerText = `${playerScore} : ${computerScore}`;
+}
+
+function updateChoiceImage(player, choice)
+{
+    const choices = {"rock": "icons/rock.png", "paper": "icons/paper.png", "scissors": "icons/scissors.png"}
+
+    let choiceImg;
+    if (player === "player")
+        choiceImg = imgPlayerChoice;  
+    else if (player === "computer")
+        choiceImg = imgComputerChoice;
+    else
+        return;
+
+    choiceImg.src = choices[choice];
+}
+
+
+function startRound(e)
+{
+    const playerChoice = e.currentTarget.id
+    updateChoiceImage("player", playerChoice);
+
+    const computerChoice = getComputerChoice();
+    updateChoiceImage("computer", computerChoice);
+
+    const result = playRound(playerChoice, computerChoice);
+    console.log(result);
+
+    if (result["winner"] === "player")
+        playerScore++;
+    else if (result["winner"] === "computer")
+        computerScore++;
+
+    updateScore(playerScore, computerScore);
+    
+    if (!isGameRunning(playerScore, computerScore))
+    {
+        updateWinner(playerScore, computerScore);
+        playerScore = 0;
+        computerScore = 0;
+    }
+}

@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Play:wght@700&display=swap');
+
+:root {
+    --main-color: #e69596;
+    --main-color-dark: #b62b2e;
+    --colored-text: #d75759;
+    --dark-background:  rgb(25, 24, 41);
+    --button-background: rgb(80, 76, 126);;
+}
+
+body, html {
+    background-color: var(--dark-background);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding:0;
+    height: 100vh;
+}
+
+.page {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+/* Header */
+header {
+    background-color: var(--main-color);
+    box-sizing: border-box;
+
+    flex: 0 0 min-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+img.icon {
+    height: 80px;
+}
+
+
+/* Navigation */
+nav {
+    display: flex;
+    gap: 10px;
+}
+
+a.nav-link {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-bottom: 1px solid transparent; /*Keeps text from moving when adding border on hover*/
+}
+
+a.nav-link:hover {
+    color: rgb(238, 238, 238);
+    border-bottom: 1px solid var(--colored-text);
+}
+
+/* Center */
+.content {
+    flex: 1 0 auto;
+
+    padding: 0px 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.title {
+    color: var(--colored-text);
+    font-weight: bolder;
+    font-size: 48px;
+}
+
+.game {
+    background-color: var(--main-color-dark);
+    padding: 32px;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score {
+    color: black;
+    font-size: 64px;
+    font-family: 'Play', sans-serif;
+}
+
+
+.hand-choices {
+    color: black;
+    font-weight: bold;
+    font-size: 48px;
+
+    padding: 32px;
+
+    display: flex;
+    align-items: center;
+    gap: 64px;
+}
+
+/* Buttons and choice images */
+img.hand-choice-player, img.hand-choice-computer {
+    background-color: var(--button-background);
+
+    padding: 16px;
+    box-shadow: 5px 5px 1px black;
+    
+}
+
+
+.buttons {
+    background-color: var(--main-color-dark);
+    padding: 32px;
+    border-radius: 8px;
+
+    display: flex;
+    gap: 64px;
+}
+
+button.button {
+    background-color: var(--button-background);
+    border: 0;
+    box-shadow: 5px 5px 1px black;
+    padding: 10px;
+}
+
+button.button:hover {
+    transition-duration: 0.1s;
+    rotate: 2deg;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background-color: var(--main-color);
+    
+    padding: 15px;
+    flex: 0 0 min-content;
+}
+
+ul.footer-list
+{
+
+    list-style: none;
+    padding: 0;
+    margin:0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
